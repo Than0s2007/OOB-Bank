@@ -1,110 +1,82 @@
-import java.util.*;
-public class App {
-    static Scanner scanner = new Scanner(System.in);
- 
-    public static void main(String[] args) {
-        Bank bank = new Bank();
-        boolean running = true;
- 
-        while (running) {
-            printMenu();
-            int choice = readInt("Choose an option: ");
- 
-            switch (choice) {
-                case 1:
-                    scanner.nextLine(); 
-                    System.out.print("Holder Name: ");
-                    String name = scanner.nextLine();
-                    double balance = readDouble("Initial Balance: ");
-                    bank.AddAccountToBank(name, balance);
-                    break;
-                case 2:
-                    bank.DisplayAllAccounts();
-                    break;
-                case 3:
-                    bank.RetrieveAccount(readInt("Account Number: "));
-                    break;
-                case 4:
-                    bank.DeleteAccount(readInt("Account Number: "));
-                    break;
-                case 5:
-                    int depAcc = readInt("Account Number: ");
-                    double depAmount = readDouble("Amount: ");
-                    bank.Deposite(depAcc, depAmount);
-                    break;
-                case 6:
-                    int witAcc = readInt("Account Number: ");
-                    double witAmount = readDouble("Amount: ");
-                    bank.WithDrawal(witAcc, witAmount);
-                    break;
-                case 7:
-                    int from = readInt("Sender Account Number: ");
-                    int to = readInt("Receiver Account Number: ");
-                    double trAmount = readDouble("Amount: ");
-                    if (from == to) {
-                        System.out.println("Cannot transfer to the same account");
-                    } else {
-                        bank.TransferMoney(from, to, trAmount);
-                    }
-                    break;
-                case 8:
-                    bank.DisplayAllTransactions();
-                    break;
-                case 9:
-                    bank.DisplayAllTransactionForOneAccount(readInt("Account Number: "));
-                    break;
-                case 10:
-                    bank.DisplayTransactionByID(readInt("Transaction Id: "));
-                    break;
-                case 0:
-                    running = false;
-                    System.out.println("Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid option, try again.");
-            }
-        }
-        scanner.close();
-    }
- 
-    static void printMenu() {
-        System.out.println("\n========== BANK MENU ==========");
-        System.out.println("1  - Add Account");
-        System.out.println("2  - Display All Accounts");
-        System.out.println("3  - Retrieve Account");
-        System.out.println("4  - Delete Account");
-        System.out.println("5  - Deposit");
-        System.out.println("6  - Withdraw");
-        System.out.println("7  - Transfer Money");
-        System.out.println("8  - Display All Transactions");
-        System.out.println("9  - Display Transactions For One Account");
-        System.out.println("10 - Display Transaction By Id");
-        System.out.println("0  - Exit");
-        System.out.println("===============================");
-    }
- 
-    static int readInt(String message) {
-        while (true) {
-            System.out.print(message);
-            try {
-                return scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid whole number.");
-                scanner.nextLine();
-            }
-        }
-    }
- 
-    static double readDouble(String message) {
-        while (true) {
-            System.out.print(message);
-            try {
-                return scanner.nextDouble();
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid number.");
-                scanner.nextLine();
-            }
-        }
-    }
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Bank bank = new Bank();
+        int choice;
+
+        do {
+            System.out.println("\n====== Bank Menu ======");
+            System.out.println("1 - Add Account");
+            System.out.println("2 - Display All Accounts");
+            System.out.println("3 - Retrieve Account");
+            System.out.println("4 - Delete Account");
+            System.out.println("5 - Deposit");
+            System.out.println("6 - Withdraw");
+            System.out.println("7 - Transfer Money");
+            System.out.println("8 - Display All Transactions");
+            System.out.println("9 - Display Transactions For One Account");
+            System.out.println("10 - Display Transaction By Id");
+            System.out.println("0 - Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            if (choice == 1) {
+                System.out.print("Enter holder name: ");
+                String name = sc.next();
+                System.out.print("Enter balance: ");
+                double balance = sc.nextDouble();
+                bank.AddAccountToBank(name, balance);
+            } else if (choice == 2) {
+                bank.DisplayAllAccounts();
+            } else if (choice == 3) {
+                System.out.print("Enter account number: ");
+                int num = sc.nextInt();
+                bank.RetrieveAccount(num);
+            } else if (choice == 4) {
+                System.out.print("Enter account number: ");
+                int num = sc.nextInt();
+                bank.DeleteAccount(num);
+            } else if (choice == 5) {
+                System.out.print("Enter account number: ");
+                int num = sc.nextInt();
+                System.out.print("Enter amount: ");
+                double amount = sc.nextDouble();
+                bank.Deposite(num, amount);
+            } else if (choice == 6) {
+                System.out.print("Enter account number: ");
+                int num = sc.nextInt();
+                System.out.print("Enter amount: ");
+                double amount = sc.nextDouble();
+                bank.WithDrawal(num, amount);
+            } else if (choice == 7) {
+                System.out.print("Enter sender account number: ");
+                int sender = sc.nextInt();
+                System.out.print("Enter receiver account number: ");
+                int receiver = sc.nextInt();
+                System.out.print("Enter amount: ");
+                double amount = sc.nextDouble();
+                bank.TransferMoney(sender, receiver, amount);
+            } else if (choice == 8) {
+                bank.DisplayAllTransactions();
+            } else if (choice == 9) {
+                System.out.print("Enter account number: ");
+                int num = sc.nextInt();
+                bank.DisplayAllTransactionForOneAccount(num);
+            } else if (choice == 10) {
+                System.out.print("Enter transaction id: ");
+                int id = sc.nextInt();
+                bank.DisplayTransactionByID(id);
+            } else if (choice == 0) {
+                System.out.println("Goodbye!");
+            } else {
+                System.out.println("Wrong choice, try again");
+            }
+
+        } while (choice != 0);
+
+        sc.close();
+    }
 }
