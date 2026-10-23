@@ -23,56 +23,79 @@ public class Main {
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
-            if (choice == 1) {
-                System.out.print("Enter holder name: ");
-                String name = sc.next();
-                System.out.print("Enter balance: ");
-                double balance = sc.nextDouble();
-                bank.AddAccountToBank(name, balance);
-            } else if (choice == 2) {
-                bank.DisplayAllAccounts();
-            } else if (choice == 3) {
-                System.out.print("Enter account number: ");
-                int num = sc.nextInt();
-                bank.RetrieveAccount(num);
-            } else if (choice == 4) {
-                System.out.print("Enter account number: ");
-                int num = sc.nextInt();
-                bank.DeleteAccount(num);
-            } else if (choice == 5) {
-                System.out.print("Enter account number: ");
-                int num = sc.nextInt();
-                System.out.print("Enter amount: ");
-                double amount = sc.nextDouble();
-                bank.Deposite(num, amount);
-            } else if (choice == 6) {
-                System.out.print("Enter account number: ");
-                int num = sc.nextInt();
-                System.out.print("Enter amount: ");
-                double amount = sc.nextDouble();
-                bank.WithDrawal(num, amount);
-            } else if (choice == 7) {
-                System.out.print("Enter sender account number: ");
-                int sender = sc.nextInt();
-                System.out.print("Enter receiver account number: ");
-                int receiver = sc.nextInt();
-                System.out.print("Enter amount: ");
-                double amount = sc.nextDouble();
-                bank.TransferMoney(sender, receiver, amount);
-            } else if (choice == 8) {
-                bank.DisplayAllTransactions();
-            } else if (choice == 9) {
-                System.out.print("Enter account number: ");
-                int num = sc.nextInt();
-                bank.DisplayAllTransactionForOneAccount(num);
-            } else if (choice == 10) {
-                System.out.print("Enter transaction id: ");
-                int id = sc.nextInt();
-                bank.DisplayTransactionByID(id);
-            } else if (choice == 0) {
-                System.out.println("Goodbye!");
-            } else {
-                System.out.println("Wrong choice, try again");
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter holder name: ");
+                    String name = sc.next();
+                    System.out.print("Enter balance: ");
+                    double balance = sc.nextDouble();
+                    bank.AddAccountToBank(name, balance);
+                    break;
+
+                case 2:
+                    bank.DisplayAllAccounts();
+                    break;
+
+                case 3:
+                    System.out.print("Enter account number: ");
+                    int retrieveNum = sc.nextInt();
+                    bank.RetrieveAccount(retrieveNum);
+                    break;
+
+                case 4:
+                    System.out.print("Enter account number: ");
+                    int deleteNum = sc.nextInt();
+                    bank.DeleteAccount(deleteNum);
+                    break;
+
+                case 5:
+                    System.out.print("Enter account number: ");
+                    int depositNum = sc.nextInt();
+                    System.out.print("Enter amount: ");
+                    double depositAmount = sc.nextDouble();
+                    bank.Deposite(depositNum, depositAmount);
+                    break;
+
+                case 6:
+                    System.out.print("Enter account number: ");
+                    int withdrawNum = sc.nextInt();
+                    System.out.print("Enter amount: ");
+                    double withdrawAmount = sc.nextDouble();
+                    bank.WithDrawal(withdrawNum, withdrawAmount);
+                    break;
+
+                case 7:
+                    System.out.print("Enter sender account number: ");
+                    int sender = sc.nextInt();
+                    System.out.print("Enter receiver account number: ");
+                    int receiver = sc.nextInt();
+                    System.out.print("Enter amount: ");
+                    double transferAmount = sc.nextDouble();
+                    bank.TransferMoney(sender, receiver, transferAmount);
+                    break;
+
+                case 8:
+                    bank.DisplayAllTransactions();
+                    break;
+
+                case 9:
+                    System.out.print("Enter account number: ");
+                    int accNum = sc.nextInt();
+                    bank.DisplayAllTransactionForOneAccount(accNum);
+                    break;
+
+                case 10:
+                    System.out.print("Enter transaction id: ");
+                    int id = sc.nextInt();
+                    bank.DisplayTransactionByID(id);
+                    break;
+
+                case 0:
+                    System.out.println("Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Wrong choice, try again");
             }
 
         } while (choice != 0);
